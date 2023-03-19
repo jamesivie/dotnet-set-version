@@ -28,8 +28,8 @@ jobs:
       with:
         dotnet-version: 7.0.x      
     - name: Build dotnet-set-version
-      run: dotnet build dotnet-set-version -c Release
+      run: dotnet build dotnet-set-version.csproj -c Release
     - name: Package
-      run: dotnet pack dotnet-set-version -c Release
+      run: dotnet pack dotnet-set-version.csproj -c Release
     - name: Publish
       run: dotnet nuget push ./nupkg/dotnet-set-version.1.2.0.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
