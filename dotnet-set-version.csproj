@@ -7,7 +7,7 @@
 	<RootNamespace>dotnet_set_version</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	<Version>1.2.0</Version>
+	<Version>1.2.5</Version>
 	<Authors>James Ivie</Authors>
 	<Company>James Ivie</Company>
 	<Description>An MIT-licensed utility program that updates version numbers in project files and AssemblyInfo.cs files.</Description>

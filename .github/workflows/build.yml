@@ -27,9 +27,15 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 7.0.x      
-    - name: Build dotnet-set-version
+    - name: Build dotnet-set-version to use for bootstrapping
+      run: dotnet build dotnet-set-version.csproj -c Release
+    - name: Compute Version
+      run: echo "version_number=1.2.${{ github.run_number }}" >> $GITHUB_ENV
+    - name: Set the version using the initial build
+      run: dotnet run -f net7.0 ${{ env.version_number }}
+    - name: Rebuild to get a version with that version number
       run: dotnet build dotnet-set-version.csproj -c Release
     - name: Package
       run: dotnet pack dotnet-set-version.csproj -c Release
     - name: Publish
-      run: dotnet nuget push ./nupkg/dotnet-set-version.1.2.0.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ./nupkg/dotnet-set-version.${{ env.version_number }}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
