@@ -11,12 +11,14 @@ If such entries do not exist in the project files or AssemblyInfo.cs files, they
 
 ## Global Installation
 
-`dotnet tool install --global dotnet-set-version --version <tool_version>`
+`dotnet tool install --global dotnet-set-version [--version <tool_version>]`
 
 ## Local Installation
 
-`dotnet new tool-manifest # if you are setting up this repo`
-`dotnet tool install --local dotnet-set-version --version <tool_version>`
+```text
+dotnet new tool-manifest # if you are setting up this repo
+dotnet tool install --local dotnet-set-version [--version <tool_version>]
+```
 
 ## Accessing Versions Using Reflection
 
