@@ -10,7 +10,7 @@ Regex AssemblyInformationalVersion = new Regex(@"(?<=\[.*Assembly.*Informational
 if (args.Length < 1)
 {
     Console.WriteLine("Usage: ");
-    Console.WriteLine("\tdotnet-set-version <version_number> (<alternate_version_string>)");
+    Console.WriteLine("\tdotnet-set-version <version_number> [<alternate_version_string>]");
     Console.WriteLine("");
     return;
 }
@@ -23,7 +23,7 @@ foreach (string arg in args)
     if (string.Equals(arg, "-NoPackageOutputPath") || string.Equals(arg, "/NoPackageOutputPath")) noPackageOutputPath = true;
     // check for a version number
     if (VersionNumberValidate.IsMatch(arg)) versionNumber = arg;
-    else if (versionNumber == null) alternateVersionString = arg;
+    else if (versionNumber != null && alternateVersionString == null) alternateVersionString = arg;
 }
 if (versionNumber == null)
 {
@@ -45,7 +45,7 @@ void UpdateProjectFile(string targetFile, string newVersion, string? alternateVe
     string targetFileContents = File.ReadAllText(targetFile);
     if (alternateVersionString != null)
     {
-        targetFileContents = ProjectFileInformationalVersionReplace.Replace(targetFileContents, newVersion);
+        targetFileContents = ProjectFileInformationalVersionReplace.Replace(targetFileContents, alternateVersionString);
     }
     targetFileContents = ProjectFileVersionReplace.Replace(targetFileContents, newVersion);
     if (noPackageOutputPath) targetFileContents = PackageOutputPathReplace.Replace(targetFileContents, "");
@@ -60,7 +60,7 @@ void UpdateCodeFile(string targetFile, string newVersion, string? alternateVersi
     targetFileContents = AssemblyInfoVersionReplace.Replace(targetFileContents, newVersion);
     if (alternateVersionString != null)
     {
-        targetFileContents = AssemblyInformationalVersion.Replace(targetFileContents, newVersion);
+        targetFileContents = AssemblyInformationalVersion.Replace(targetFileContents, alternateVersionString);
     }
     File.WriteAllText(targetFile, targetFileContents);
     string outputAlternateVersionSuffix = alternateVersionString != null ? $" and informational version {alternateVersionString}" : "";
