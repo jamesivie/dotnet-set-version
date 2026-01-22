@@ -1,8 +1,8 @@
 # dotnet-set-version
 
-[dotnet-set-version](https://github.com/jamesivie/dotnet-set-version) sets version numbers into project files and AssemblyInfo files.
-The first argument is the version number to set and must be of the form nnn.nnn[.nnn[.nnn]], which may or may not be a semver version.  This gets set into any <AssemblyVersion>, <FileVersion>, <PackageVersion>, or <Version> tags found any project files that have such an entry, as well as into the AssemblyVersion and AssemblyFileVersion attributes in any AssemblyInfo.cs files found in the project directory or any subdirectories.
-The second optional argument is an alternate version string to set into the AssemblyInformationalVersion attribute.  This alternate version string is generally a Git SHA, but can be any string you want.  This gets set into any <InformationalVersion> tags in any project files that have such an entry, as well as into the AssemblyInformationalVersion attributes found in AssemblyInfo.cs files in the project directory or any subdirectories.
+[dotnet-set-version](https://github.com/jamesivie/dotnet-set-version) sets version numbers into project files and AssemblyInfo.cs files.
+The first argument is the version number to set and must be of the form nnn.nnn[.nnn[.nnn]], which may or may not be a [semver](https://semver.org/) version.  This gets set into any `<AssemblyVersion>`, `<FileVersion>`, `<PackageVersion>`, or `<Version>` tags found any project files that have such an entry, as well as into the AssemblyVersion and AssemblyFileVersion attributes in any AssemblyInfo.cs files found in the project directory or any subdirectories.
+The second optional argument is an alternate version string to set into the AssemblyInformationalVersion attribute.  This alternate version string is generally a Git SHA, but can be any string you want, and storing the build date here may be preferable to the sample code below that extracts it from the assembly headers manually.  This gets set into any `<InformationalVersion>` tags in any project files that have such an entry, as well as into the AssemblyInformationalVersion attributes found in AssemblyInfo.cs files in the project directory or any subdirectories.
 If such entries do not exist in the project files or AssemblyInfo.cs files, they will *not* be created.
 
 ## Usage
