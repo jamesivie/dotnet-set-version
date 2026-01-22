@@ -4,8 +4,8 @@ Regex VersionNumberValidate = new(@"^[0-9]+(\.[0-9]+){1,3}$", RegexOptions.Compi
 Regex ProjectFileVersionReplace = new(@"(?<=<(?:Assembly|File|Package|)Version>)[^<]*", RegexOptions.Compiled);
 Regex ProjectFileInformationalVersionReplace = new Regex(@"(?<=<InformationalVersion>)[^<]*", RegexOptions.Compiled);
 Regex PackageOutputPathReplace = new(@"<PackageOutputPath>[^<]*</PackageOutputPath>", RegexOptions.Compiled);
-Regex AssemblyInfoVersionReplace = new(@"(?<=\[.*Assembly.*Version ?\(\"")([^\""]*)", RegexOptions.Compiled);
-Regex AssemblyInformationalVersion = new Regex(@"(?<=\[.*Assembly.*Informational.*Version ?\(\"")([^\""]*)", RegexOptions.Compiled);
+Regex AssemblyInfoVersionReplace = new(@"(?<=\[.*(?:Assembly|File|)Version ?\(\"")([^\""]*)", RegexOptions.Compiled);
+Regex AssemblyInformationalVersion = new Regex(@"(?<=\[.*AssemblyInformationalVersion ?\(\"")([^\""]*)", RegexOptions.Compiled);
 
 if (args.Length < 1)
 {
